@@ -18,10 +18,12 @@ function App() {
       q:search
   }});
 
-  // console.log(res.data.items);
+  console.log(res.data.items[0].snippet);
   setVideos(res.data.items);
   setSelect(res.data.items[0]);
   }
+
+  const onVideoSelect = video => setSelect(video)
 
   useEffect(()=>{
     // handleSearch('youtube clone')
@@ -33,13 +35,13 @@ function App() {
           {/* Search Bar */}
           <SearchBar submit={handleSearch}/>
         </Grid>
-        <Grid item xs={8} style={{paddingTop:"2%"}}>
+        <Grid item sm={12} md={8} style={{paddingTop:"2%"}}>
           {/* Video Frame */}
           <VideoFrame video={selectedVideo}/>
         </Grid>
-        <Grid item xs={4} style={{paddingTop:"2%"}}>
-          VideoList
-          <VideoList videos={videos}/>
+        <Grid item sm={12} md={4} style={{paddingTop:"2%",paddingLeft:"2%"}}>
+          {/* VideoList */}
+          <VideoList videos={videos} videoSelect={onVideoSelect}/>
         </Grid>
       </Grid>
     

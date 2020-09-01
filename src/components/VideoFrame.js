@@ -10,7 +10,7 @@ function VideoFrame({video}) {
        
         <>
         <Paper elevation={12} style={{height:"70%"}}>
-            <iframe frameBorder="0" height="350px" width="100%" title="Video Player"  src={vidsrc} />
+            <iframe frameBorder="0" height="370px" width="100%" title="Video Player"  src={vidsrc} />
         </Paper>
         <Paper elevation={6} style={{padding:"15px"}}>
             <Typography variant="h5" style={{ padding:"5px"}}>{video.snippet.title}</Typography>
