@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react';
 import youtube from './apis/youtube';
 import {Grid} from '@material-ui/core';
-import SearchBar from './components/SearchBar';
-import VideoFrame from './components/VideoFrame';
-import VideoList from './components/VideoList';
+import SearchBar from './components/oldversion/SearchBar';
+import VideoFrame from './components/oldversion/VideoFrame';
+import VideoList from './components/oldversion/VideoList';
 
 function App() {
 
