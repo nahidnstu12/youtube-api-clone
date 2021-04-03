@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 $text-color: #b1bdb4;
+$text-primary-color: #fff;
 
 $black-primary: #16181b;
 $black-secondary: #121417;
 $border-color: #4c4c4c;
+$category-hover-color: #1a4033;
+$category-active-color: #303a3a;
 
-$breakpoint-medium: 1224px;
+$breakpoint-medium: 990px;
 $breakpoint-small: 720px;
 
 * {

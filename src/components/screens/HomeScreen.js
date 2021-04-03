@@ -9,9 +9,7 @@ const HomeScreen = () => {
       <Categoriesbar />
       <div className='video-grid'>
         {[...new Array(20)].map(() => (
-          <div className='video'>
             <Video />
-          </div>
         ))}
       </div>
     </div>

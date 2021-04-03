@@ -4,10 +4,12 @@ import {AiOutlineSearch} from 'react-icons/ai'
 import {MdApps, MdNotifications} from 'react-icons/md'
 import './_header.scss'
 
-const Header = () => {
+const Header = ({handleToggle}) => {
     return (
         <div className="header">
-            <FaBars className="header__menu" size={26} />
+            <FaBars className="header__menu" size={26} 
+            onClick={()=>handleToggle()}
+            />
             <img src="youtube-api-clone/ytlogo.png" alt="logo" className="header__logo"/>
             <form >
                 <input type="text" placeholder="Search "/>

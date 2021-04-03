@@ -26,13 +26,14 @@
         background-color: $black-secondary;
         border-radius: 6px;
         border: 1px solid;
-        font-size: 16px;
+        font-size: 19px;
 
         input{
             width: 100%;
             border: none;
             padding: .3rem;
             background: transparent;
+            color: $text-color;
 
             &:focus{
                 outline: none;
