@@ -10,6 +10,8 @@
     flex-direction: column;
     transition: transform 0.2s ease-in;
     padding-top: 2rem;
+    z-index: 99;
+    height: 100vh;
 
     li{
         display: flex;
