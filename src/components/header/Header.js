@@ -10,7 +10,7 @@ const Header = ({handleToggle}) => {
             <FaBars className="header__menu" size={26} 
             onClick={()=>handleToggle()}
             />
-            <img src="youtube-api-clone/ytlogo.png" alt="logo" className="header__logo"/>
+            <img src="./ytlogo.png" alt="logo" className="header__logo"/>
             <form >
                 <input type="text" placeholder="Search "/>
                 <button type="submit">
@@ -20,7 +20,7 @@ const Header = ({handleToggle}) => {
             <div className="header__icons">
                 <MdNotifications size={28} />
                 <MdApps size={28} />
-                <img src="youtube-api-clone/avatar.png" alt="user" className="avatar"/>
+                <img src="./avatar.png" alt="user" className="avatar"/>
             </div>
             
         </div>

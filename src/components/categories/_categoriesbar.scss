@@ -6,11 +6,11 @@
     padding: 6px;
     overflow-x: scroll;
     font-size: 14px;
-    position: fixed;
+    position: sticky;
     z-index: 99;
     background: $black-secondary;
-    top:56px;
-    margin-left: -12px;
+    top:-13px;
+    // margin-left: -12px;
 
     &__element{
         padding: 8px 13px;
