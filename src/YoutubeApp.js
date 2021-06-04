@@ -51,7 +51,7 @@ const YoutubeApp = () => {
         </Layout>
       </Route>
       <Route>
-        <Redirect to="/youtube-api-clone/" />
+        <Redirect to={`${CLIENT_URL}/`} />
       </Route>
     </Switch>
     // </Router>
