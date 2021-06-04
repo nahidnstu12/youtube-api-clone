@@ -9,8 +9,6 @@ import {
   LOG_OUT,
 } from "../actionTypes";
 
-
-
 export const login = () => async (dispatch) => {
   try {
     dispatch({
@@ -18,6 +16,7 @@ export const login = () => async (dispatch) => {
     });
 
     const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope("https://www.googleapis.com/auth/youtube.force-ssl");
     const res = await auth.signInWithPopup(provider);
     console.log(res);
 
@@ -41,7 +40,6 @@ export const login = () => async (dispatch) => {
     // session storage
     sessionStorage.setItem(YTC_ACESS_TOKEN, accessToken);
     sessionStorage.setItem(YTC_PROFILE, JSON.stringify(profile));
-
   } catch (error) {
     dispatch({
       type: LOGIN_FAILED,
@@ -51,10 +49,13 @@ export const login = () => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
+
+  await auth.signOut();
+
   dispatch({
     type: LOG_OUT,
   });
-  
+
   sessionStorage.removeItem(YTC_ACESS_TOKEN);
   sessionStorage.removeItem(YTC_PROFILE);
 };
