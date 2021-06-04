@@ -4,7 +4,8 @@ import {AiOutlineSearch} from 'react-icons/ai'
 import {MdApps, MdNotifications} from 'react-icons/md'
 import './_header.scss'
 
-const Header = ({handleToggle}) => {
+const Header = ({handleToggle,name,photoUrl}) => {
+console.log(name)
     return (
         <div className="header">
             <FaBars className="header__menu" size={26} 
@@ -20,7 +21,7 @@ const Header = ({handleToggle}) => {
             <div className="header__icons">
                 <MdNotifications size={28} />
                 <MdApps size={28} />
-                <img src="./avatar.png" alt="user" className="avatar"/>
+                <img src={photoUrl} alt={name} className="avatar" title={name}/>
             </div>
             
         </div>

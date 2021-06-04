@@ -15,7 +15,9 @@ export const LoginScreen = () => {
 
   useEffect(() => {
     if (token) {
-      history.push(`${CLIENT_URL}/auth`);
+      history.push(`${CLIENT_URL}/`);
+      console.log("login success")
+
     }
   }, [token]);
 

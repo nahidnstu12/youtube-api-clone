@@ -10,11 +10,12 @@ import "./_app.scss";
 import { useEffect } from "react";
 
 const Layout = ({ children }) => {
+  const { profile } = useSelector((state) => state.auth);
   const [sidebar, handleSidebar] = useState(false);
   const handleToggle = () => handleSidebar((val) => !val);
   return (
     <>
-      <Header handleToggle={handleToggle} />
+      <Header handleToggle={handleToggle} name={profile.name} photoUrl={profile.photoUrl} />
       <div className="app__container">
         <Sidebar sidebar={sidebar} handleToggle={handleToggle} />
         <div className="app__main">{children}</div>
