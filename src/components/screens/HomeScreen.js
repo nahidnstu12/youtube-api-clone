@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import {useDispatch} from 'react-redux'
-import { getPopularVideos } from '../../redux/actions/videosAction';
-import Categoriesbar from '../categories/Categoriesbar';
-import Video from '../videos/Video';
-import './_homescreen.scss'
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPopularVideos } from "../../redux/actions/videosAction";
+import Categoriesbar from "../categories/Categoriesbar";
+import Video from "../videos/Video";
+import "./_homescreen.scss";
 
 const HomeScreen = () => {
-  const [videos,setVideos] = useState([])
+  // const [videos,setVideos] = useState([])
+  const { videos } = useSelector((state) => state.homeVideos);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     // dispatch(getPopularVideos())
-    
-  },[dispatch])
-  
+    // console.log(videos.items)
+  }, [dispatch]);
+  console.log(videos)
+
   return (
     <div className="home_screen">
       <Categoriesbar />
-      <div className='video-grid'>
-        {[...new Array(20)].map(() => (
-            <Video />
-        ))}
+      <div className="video-grid">
+        {videos.length !== 0 ? videos.map((video) => (
+          <Video video={video} key={video.id}/>
+        ))
+        :
+        <div>Loading...</div>
+      }
       </div>
     </div>
   );

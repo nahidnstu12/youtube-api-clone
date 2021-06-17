@@ -34,6 +34,9 @@
     &__details{
         display: flex;
         align-items: center;
+        .space{
+            margin: 0 4px;
+        }
     }
     &__channel{
         display: flex;

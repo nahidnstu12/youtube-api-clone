@@ -1,30 +1,35 @@
-import request from "../../utils/axios"
-import { HOME_REQUEST, HOME_SUCCESS } from "../actionTypes"
+import request from "../../utils/axios";
+import { HOME_FAILED, HOME_REQUEST, HOME_SUCCESS } from "../actionTypes";
 
-export const getPopularVideos = () => async dispatch =>{
-   try {
+export const getPopularVideos = () => async (dispatch) => {
+  try {
     dispatch({
-        type:HOME_REQUEST
-    })
+      type: HOME_REQUEST,
+    });
 
-    const res = await request('/videos',{
-        params:{
-            part:'snippet,contentDetails,statistics',
-            chart:'mostPopular',
-            regionCode:'IN',
-            maxResults:20,
-            
-        }
-    })
-    console.log(res)
-    
+    const { data } = await request("/videos", {
+      params: {
+        part: "snippet,contentDetails,statistics",
+        chart: "mostPopular",
+        regionCode: "BD",
+        maxResults: 20,
+        pageToken: "",
+      },
+    });
+    // console.log(res)
+
     dispatch({
-        type:HOME_SUCCESS,
-        payload:res.data
+      type: HOME_SUCCESS,
+      payload: {
+        videos: data.items,
+        pageToken: data.nextPageToken,
+      },
+    });
+  } catch (error) {
+    console.log("error " + error);
+    dispatch({
+      type: HOME_FAILED,
+      message: error.message
     })
-
-   } catch (error) {
-       console.log("error "+ error)
-   }
-   
-}
+  }
+};
