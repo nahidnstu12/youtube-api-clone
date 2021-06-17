@@ -7,8 +7,11 @@ import request from "../../utils/axios";
 
 const Video = ({ video }) => {
   const [chanelIcon, setChanelIcon] = useState("");
+  const [duration, setDuration] = useState(null);
+  const [views, setViews] = useState(null);
+
   const {
-    // id,
+    id,
     snippet: {
       title,
       publishedAt,
@@ -16,14 +19,32 @@ const Video = ({ video }) => {
       channelTitle,
       channelId,
     },
-    contentDetails: { duration },
-    statistics: { viewCount },
+    
   } = video;
 
   //   console.log("time:"+moment("PT15M33S").fromNow())
   const seconds = moment.duration(duration).asSeconds();
   const _duration = moment.utc(seconds * 1000).format("mm:ss");
+  const _videoId = id?.videoId || id
 
+  useEffect(() => {
+    const getContents = async () => {
+      const {
+        data: { items },
+      } = await request("/videos", {
+        params: {
+          part: "contentDetails,statistics",
+          id: _videoId,
+        },
+      });
+      setDuration(items[0].contentDetails.duration)
+      setViews(items[0].statistics.viewCount) 
+    //   console.log(items)
+    };
+    getContents();
+  }, [_videoId]);
+
+  // get channel Icon
   useEffect(() => {
     const getChannelIcon = async () => {
       const {
@@ -38,7 +59,8 @@ const Video = ({ video }) => {
     };
     getChannelIcon();
   }, [channelId]);
-  console.log(chanelIcon);
+  //   console.log(chanelIcon);
+  
   return (
     <div className="video">
       <div className="video__top">
@@ -48,7 +70,7 @@ const Video = ({ video }) => {
       <div className="video__title">{title}</div>
       <div className="video__details">
         <span>
-          <AiFillEye /> {numeral(viewCount).format("0.a")} Views
+          <AiFillEye /> {numeral(views).format("0.a")} Views
         </span>
         <span className="space"> • </span>
         <span> {moment(publishedAt).fromNow()}</span>

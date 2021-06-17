@@ -4,6 +4,7 @@ const initailState = {
   videos:[],
   pageToken:null,
   loading: false,
+  category: "All",
 };
 
 export const videosReducer = (state = initailState, action) => {
@@ -21,7 +22,8 @@ export const videosReducer = (state = initailState, action) => {
         ...state,
         loading: false,
         videos:payload.videos,
-        pageToken: payload.pageToken
+        pageToken: payload.pageToken,
+        activeCategory:payload.category
       };
 
     case types.HOME_FAILED:

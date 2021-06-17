@@ -15,14 +15,14 @@ const HomeScreen = () => {
     // dispatch(getPopularVideos())
     // console.log(videos.items)
   }, [dispatch]);
-  console.log(videos)
+  // console.log(videos)
 
   return (
     <div className="home_screen">
       <Categoriesbar />
       <div className="video-grid">
-        {videos.length !== 0 ? videos.map((video) => (
-          <Video video={video} key={video.id}/>
+        {videos.length !== 0 ? videos.map((video,index) => (
+          <Video video={video} key={index}/>
         ))
         :
         <div>Loading...</div>
