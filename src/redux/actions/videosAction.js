@@ -1,7 +1,7 @@
 import request from "../../utils/axios";
 import { HOME_FAILED, HOME_REQUEST, HOME_SUCCESS } from "../actionTypes";
 
-export const getPopularVideos = () => async (dispatch) => {
+export const getPopularVideos = () => async (dispatch, getStatic) => {
   try {
     dispatch({
       type: HOME_REQUEST,
@@ -13,28 +13,29 @@ export const getPopularVideos = () => async (dispatch) => {
         chart: "mostPopular",
         regionCode: "BD",
         maxResults: 20,
-        pageToken: "",
+        pageToken: getStatic().homeVideos.pageToken,
       },
     });
-    // console.log(res)
+    console.log(data)
 
     dispatch({
       type: HOME_SUCCESS,
       payload: {
         videos: data.items,
         pageToken: data.nextPageToken,
+        category: 'All'
       },
     });
   } catch (error) {
     console.log("error " + error);
     dispatch({
       type: HOME_FAILED,
-      message: error.message
-    })
+      message: error.message,
+    });
   }
 };
 
-export const getCategoricVideos = (keyword="reactjs") => async (dispatch,getStatic) => {
+export const getCategoricVideos = (keyword) => async (dispatch, getStatic) => {
   try {
     dispatch({
       type: HOME_REQUEST,
@@ -46,24 +47,24 @@ export const getCategoricVideos = (keyword="reactjs") => async (dispatch,getStat
         maxResults: 20,
         pageToken: getStatic().homeVideos.pageToken,
         q: keyword,
-        type: 'video',
+        type: "video",
       },
     });
-    console.log(data)
+    console.log(data);
 
     dispatch({
       type: HOME_SUCCESS,
       payload: {
         videos: data.items,
         pageToken: data.nextPageToken,
-        category: keyword
+        category: keyword,
       },
     });
   } catch (error) {
     console.log("error " + error);
     dispatch({
       type: HOME_FAILED,
-      message: error.message
-    })
+      message: error.message,
+    });
   }
 };

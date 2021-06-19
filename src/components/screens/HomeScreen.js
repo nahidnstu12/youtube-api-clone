@@ -1,33 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
-import { getPopularVideos } from "../../redux/actions/videosAction";
+import {
+  getCategoricVideos,
+  getPopularVideos,
+} from "../../redux/actions/videosAction";
 import Categoriesbar from "../categories/Categoriesbar";
 import Video from "../videos/Video";
+import Loader from "./Loader";
 import "./_homescreen.scss";
 
 const HomeScreen = () => {
   // const [videos,setVideos] = useState([])
-  const { videos } = useSelector((state) => state.homeVideos);
+  const { videos, activeCategory} = useSelector((state) => state.homeVideos);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getPopularVideos())
-    // console.log(videos.items)
+    dispatch(getPopularVideos());
+    // console.log("pageToken")
   }, [dispatch]);
-  // console.log(videos)
+  console.log(videos.length)
 
+  const fetchData = () => {
+    if (activeCategory === "All") {
+      dispatch(getPopularVideos());
+      // console.log("fetch")
+
+    } else {
+      dispatch(getCategoricVideos(activeCategory));
+    }
+  };
   return (
     <div className="home_screen">
       <Categoriesbar />
-      <div className="video-grid">
-        {videos.length !== 0 ? videos.map((video,index) => (
-          <Video video={video} key={index}/>
-        ))
-        :
-        <div>Loading...</div>
-      }
-      </div>
+
+      <InfiniteScroll
+        dataLength={videos.length}
+        hasMore={true}
+        next={fetchData}
+        loader={<Loader />}
+        className="video-grid"
+      >
+        {videos.map((video, index) => (
+          <Video video={video} key={index} />
+        ))}
+      </InfiniteScroll>
     </div>
   );
 };

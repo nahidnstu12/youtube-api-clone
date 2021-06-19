@@ -1,10 +1,10 @@
 import * as types from "../actionTypes";
 
 const initailState = {
-  videos:[],
-  pageToken:null,
+  videos: [],
+  pageToken: null,
   loading: false,
-  category: "All",
+  activeCategory: "All",
 };
 
 export const videosReducer = (state = initailState, action) => {
@@ -21,9 +21,12 @@ export const videosReducer = (state = initailState, action) => {
       return {
         ...state,
         loading: false,
-        videos:payload.videos,
+        videos:
+          state.activeCategory === payload.category
+            ? [...state.videos, ...payload.videos]
+            : payload.videos,
         pageToken: payload.pageToken,
-        activeCategory:payload.category
+        activeCategory: payload.category,
       };
 
     case types.HOME_FAILED:
@@ -33,7 +36,6 @@ export const videosReducer = (state = initailState, action) => {
         error: payload,
       };
 
-      
     default:
       return state;
   }
