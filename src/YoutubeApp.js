@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/header/Header";
 import HomeScreen from "./components/screens/HomeScreen";
 import { LoginScreen } from "./components/screens/LoginScreen";
@@ -7,15 +7,14 @@ import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import { CLIENT_URL } from "./utils/contsants";
 import { useSelector } from "react-redux";
 import "./_app.scss";
-import { useEffect } from "react";
 
 const Layout = ({ children }) => {
-  const { profile } = useSelector((state) => state.auth);
   const [sidebar, handleSidebar] = useState(false);
   const handleToggle = () => handleSidebar((val) => !val);
+
   return (
     <>
-      <Header handleToggle={handleToggle} name={profile.name} photoUrl={profile.photoUrl} />
+      <Header handleToggle={handleToggle} />
       <div className="app__container">
         <Sidebar sidebar={sidebar} handleToggle={handleToggle} />
         <div className="app__main">{children}</div>

@@ -14,9 +14,10 @@ import { logout } from "../../redux/actions/authAction";
 
 const Sidebar = ({ sidebar, handleToggle }) => {
   const dispatch = useDispatch();
-  
+
   const handleLogout = () => {
     console.log("logout");
+    
     dispatch(logout());
   };
 
