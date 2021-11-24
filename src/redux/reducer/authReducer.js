@@ -1,13 +1,7 @@
-import { YTC_ACESS_TOKEN, YTC_PROFILE } from "../../utils/contsants";
 import * as types from "../actionTypes";
+import initialState from "./initialState";
 
-const initailState = {
-  accessToken: sessionStorage.getItem(YTC_ACESS_TOKEN) || null,
-  profile: JSON.parse(sessionStorage.getItem(YTC_PROFILE)) || null,
-  loading: false,
-};
-
-export const authReducer = (state = initailState, action) => {
+ const authReducer = (state = initialState.auth, action) => {
   const { type, payload } = action;
   switch (type) {
     case types.LOGIN_REQUEST:
@@ -44,8 +38,10 @@ export const authReducer = (state = initailState, action) => {
         accessToken: null,
         profile: null,
       };
-      
+
     default:
       return state;
   }
 };
+
+export default authReducer;

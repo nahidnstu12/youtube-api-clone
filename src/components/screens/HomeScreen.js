@@ -8,31 +8,30 @@ import {
 import Categoriesbar from "../categories/Categoriesbar";
 import Video from "../videos/Video";
 import Loader from "./Loader";
-import "./_homescreen.scss";
+import styles from "./_homescreen.module.scss";
 
 const HomeScreen = () => {
   // const [videos,setVideos] = useState([])
-  const { videos, activeCategory} = useSelector((state) => state.homeVideos);
-
+  const { videos, activeCategory } = useSelector((state) => state.homeVideos);
+  console.log(videos);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPopularVideos());
     // console.log("pageToken")
   }, [dispatch]);
-  console.log(videos.length)
+  console.log(videos.length);
 
   const fetchData = () => {
     if (activeCategory === "All") {
       dispatch(getPopularVideos());
       // console.log("fetch")
-
     } else {
       dispatch(getCategoricVideos(activeCategory));
     }
   };
   return (
-    <div className="home_screen">
+    <div className={styles.home_screen}>
       <Categoriesbar />
 
       <InfiniteScroll
@@ -40,7 +39,7 @@ const HomeScreen = () => {
         hasMore={true}
         next={fetchData}
         loader={<Loader />}
-        className="video-grid"
+        className={styles.video_grid}
       >
         {videos.map((video, index) => (
           <Video video={video} key={index} />

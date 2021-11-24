@@ -9,7 +9,7 @@ import {
   MdSentimentDissatisfied,
   MdLibraryBooks,
 } from "react-icons/md";
-import "./_sidebar.scss";
+import styles from "./sidebar.module.scss";
 import { logout } from "../../redux/actions/authAction";
 
 const Sidebar = ({ sidebar, handleToggle }) => {
@@ -23,7 +23,7 @@ const Sidebar = ({ sidebar, handleToggle }) => {
 
   return (
     <nav
-      className={sidebar ? "sidebar open" : "sidebar"}
+      className={`${sidebar} ? ${styles.sidebar} ${styles.open} : ${styles.sidebar}`}
       onClick={() => handleToggle()}
     >
       <li>

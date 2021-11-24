@@ -1,4 +1,4 @@
-@import '../../base.scss';
+@import "../../styles/base";
 
 .home_screen{
     width: 100%;
@@ -7,7 +7,7 @@
     overflow: scroll;
     // border: 2px solid seagreen;
 }
-.video-grid{
+.video_grid{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-gap:24px;
@@ -16,14 +16,14 @@
 }
 
 @media (max-width: $breakpoint-medium){
-    .video-grid{
+    .video_grid{
         grid-template-columns: repeat(3,1fr);
         grid-gap:22px;
     }
 }
 
 @media (max-width: $breakpoint-small){
-    .video-grid{
+    .video_grid{
         grid-template-columns: repeat(2,1fr);
     }
 }

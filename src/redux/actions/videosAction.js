@@ -16,14 +16,14 @@ export const getPopularVideos = () => async (dispatch, getStatic) => {
         pageToken: getStatic().homeVideos.pageToken,
       },
     });
-    console.log(data)
+    console.log(data);
 
     dispatch({
       type: HOME_SUCCESS,
       payload: {
         videos: data.items,
         pageToken: data.nextPageToken,
-        category: 'All'
+        category: "All",
       },
     });
   } catch (error) {

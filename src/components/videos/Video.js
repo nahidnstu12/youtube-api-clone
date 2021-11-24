@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import numeral from "numeral";
 import { AiFillEye } from "react-icons/ai";
-import "./_video.scss";
+import styles from "./_video.module.scss";
 import request from "../../utils/axios";
 
 const Video = ({ video }) => {
@@ -62,20 +62,20 @@ const Video = ({ video }) => {
   //   console.log(chanelIcon);
   
   return (
-    <div className="video">
-      <div className="video__top">
+    <div className={styles.video}>
+      <div className={styles.video__top}>
         <img src={medium.url} alt="thumbnail" />
         <span>{_duration}</span>
       </div>
-      <div className="video__title">{title}</div>
-      <div className="video__details">
+      <div className={styles.video__title}>{title}</div>
+      <div className={styles.video__details}>
         <span>
           <AiFillEye /> {numeral(views).format("0.a")} Views
         </span>
-        <span className="space"> • </span>
+        <span className={styles.space}> • </span>
         <span> {moment(publishedAt).fromNow()}</span>
       </div>
-      <div className="video__channel">
+      <div className={styles.video__channel}>
         <img src={chanelIcon} alt="channel" />
         <p>{channelTitle}</p>
       </div>

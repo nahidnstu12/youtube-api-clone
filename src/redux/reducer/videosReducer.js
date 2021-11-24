@@ -1,13 +1,8 @@
 import * as types from "../actionTypes";
+import initialState from "./initialState";
 
-const initailState = {
-  videos: [],
-  pageToken: null,
-  loading: false,
-  activeCategory: "All",
-};
 
-export const videosReducer = (state = initailState, action) => {
+const videosReducer = (state = initialState.homeVideos, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -40,3 +35,5 @@ export const videosReducer = (state = initailState, action) => {
       return state;
   }
 };
+
+export default videosReducer;

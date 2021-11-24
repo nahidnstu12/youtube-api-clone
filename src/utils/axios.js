@@ -2,10 +2,10 @@ import axios from "axios";
 
 const request = axios.create({
     
-  baseURL: process.env.REACT_APP_YTC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_APP_YTC_API_URL,
 
   params: {
-    key: process.env.REACT_APP_YTC_API_KEY,
+    key: process.env.NEXT_PUBLIC_APP_YTC_API_KEY,
   },
 });
 
