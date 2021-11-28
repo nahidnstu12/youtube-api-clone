@@ -9,7 +9,7 @@ const Video = ({ video }) => {
   const [chanelIcon, setChanelIcon] = useState("");
   const [duration, setDuration] = useState(null);
   const [views, setViews] = useState(null);
-
+// console.log(video)
   const {
     id,
     snippet: {

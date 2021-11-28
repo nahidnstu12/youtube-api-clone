@@ -7,10 +7,10 @@ import styles from "./header.module.scss";
 
 const Header = ({ handleToggle }) => {
     
-  const { profile } = useSelector((state) => state.auth);
-  const name = profile?.name;
-  const photoUrl = profile?.photoUrl;
-  console.log(photoUrl);
+  // const { profile } = useSelector((state) => state.auth);
+  // const name = profile?.name;
+  // const photoUrl = profile?.photoUrl;
+  // console.log(photoUrl);
   return (
     <div className={styles.header}>
       <FaBars
@@ -18,7 +18,7 @@ const Header = ({ handleToggle }) => {
         size={26}
         onClick={() => handleToggle()}
       />
-      <img src="./ytlogo.png" alt="logo" className={styles.header__logo} />
+      <img src="/ytlogo.png" alt="logo" className={styles.header__logo} />
       <form>
         <input type="text" placeholder="Search " />
         <button type="submit">
@@ -28,7 +28,7 @@ const Header = ({ handleToggle }) => {
       <div className={styles.header__icons}>
         <MdNotifications size={28} />
         <MdApps size={28} />
-        <img src={photoUrl} alt={name} className={styles.avatar} title={name} />
+        {/* <img src={profile?.photoUrl} alt={"name"} className={styles.avatar} title={profile?.name} /> */}
       </div>
     </div>
   );

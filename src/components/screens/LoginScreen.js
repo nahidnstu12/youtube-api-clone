@@ -14,7 +14,7 @@ export const LoginScreen = () => {
   // const history = useHistory();
   const router = useRouter()
   const token = useSelector((state) => state.auth.accessToken);
-  console.log(token);
+  // console.log(token);
 
   useEffect(() => {
     if (token) {

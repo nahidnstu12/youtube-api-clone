@@ -9,15 +9,18 @@ import Categoriesbar from "../categories/Categoriesbar";
 import Video from "../videos/Video";
 import Loader from "./Loader";
 import styles from "./_homescreen.module.scss";
+import Link from "next/link";
 
 const HomeScreen = () => {
-  // const [videos,setVideos] = useState([])
-  const { videos, activeCategory } = useSelector((state) => state.homeVideos);
-  console.log(videos);
   const dispatch = useDispatch();
+  const { videos, activeCategory } = useSelector((state) => state.homeVideos);
+  const { accessToken } = useSelector((state) => state.auth);
+  // console.log(accessToken);
 
   useEffect(() => {
-    dispatch(getPopularVideos());
+    if (accessToken) {
+      dispatch(getPopularVideos());
+    }
     // console.log("pageToken")
   }, [dispatch]);
   console.log(videos.length);
@@ -25,7 +28,6 @@ const HomeScreen = () => {
   const fetchData = () => {
     if (activeCategory === "All") {
       dispatch(getPopularVideos());
-      // console.log("fetch")
     } else {
       dispatch(getCategoricVideos(activeCategory));
     }
@@ -36,13 +38,23 @@ const HomeScreen = () => {
 
       <InfiniteScroll
         dataLength={videos.length}
-        hasMore={true}
+        hasMore={false}
         next={fetchData}
         loader={<Loader />}
         className={styles.video_grid}
       >
         {videos.map((video, index) => (
-          <Video video={video} key={index} />
+          <Link
+            key={index}
+            href={`/watch/${
+              typeof video.id === "object" ? video.id.videoId : video.id
+            }`}
+            passHref
+          >
+            <a>
+              <Video video={video} />
+            </a>
+          </Link>
         ))}
       </InfiniteScroll>
     </div>

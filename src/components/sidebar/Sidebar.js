@@ -11,14 +11,18 @@ import {
 } from "react-icons/md";
 import styles from "./sidebar.module.scss";
 import { logout } from "../../redux/actions/authAction";
+import Link from "next/link";
+import { useRouter } from "next/dist/client/router";
 
 const Sidebar = ({ sidebar, handleToggle }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleLogout = () => {
     console.log("logout");
-    
+
     dispatch(logout());
+    router.push("/auth");
   };
 
   return (
@@ -26,18 +30,24 @@ const Sidebar = ({ sidebar, handleToggle }) => {
       className={`${sidebar} ? ${styles.sidebar} ${styles.open} : ${styles.sidebar}`}
       onClick={() => handleToggle()}
     >
-      <li>
-        <MdHome size={23} />
-        <span>Home</span>
-      </li>
-      <li>
-        <MdSubscriptions size={23} />
-        <span>Subscription</span>
-      </li>
-      <li>
-        <MdThumbUp size={23} />
-        <span>Liked Video</span>
-      </li>
+      <Link href="/">
+        <li>
+          <MdHome size={23} />
+          <span>Home</span>
+        </li>
+      </Link>
+      <Link href="/subscriptions">
+        <li>
+          <MdSubscriptions size={23} />
+          <span>Subscription</span>
+        </li>
+      </Link>
+      <Link href="/watch/1">
+        <li>
+          <MdThumbUp size={23} />
+          <span>Liked Video</span>
+        </li>
+      </Link>
       <li>
         <MdHistory size={23} />
         <span>History</span>
@@ -59,5 +69,21 @@ const Sidebar = ({ sidebar, handleToggle }) => {
     </nav>
   );
 };
+
+// const SidebarElement = () => {
+//   return SidebarElementsList.map((item) => (
+//     <Link href="/">
+//       <li>
+//         {item.icon}
+//         <span>{item.sidebarName}</span>
+//       </li>
+//     </Link>
+//   ));
+// }
+// const SidebarElementsList =[
+//   {sidebarName:"Home", icon: <MdHome size={23} />},
+//   {sidebarName:"Subscriptions", icon: <MdSubscriptions size={23} />},
+//   {sidebarName:"Liked Videos", icon: <MdThumbUp size={23} />},
+// ]
 
 export default Sidebar;

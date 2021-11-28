@@ -12,11 +12,11 @@ export const getPopularVideos = () => async (dispatch, getStatic) => {
         part: "snippet",
         chart: "mostPopular",
         regionCode: "BD",
-        maxResults: 20,
+        maxResults: 12,
         pageToken: getStatic().homeVideos.pageToken,
       },
     });
-    console.log(data);
+    // console.log(data);
 
     dispatch({
       type: HOME_SUCCESS,
@@ -44,13 +44,13 @@ export const getCategoricVideos = (keyword) => async (dispatch, getStatic) => {
     const { data } = await request("/search", {
       params: {
         part: "snippet",
-        maxResults: 20,
+        maxResults: 12,
         pageToken: getStatic().homeVideos.pageToken,
         q: keyword,
         type: "video",
       },
     });
-    console.log(data);
+    // console.log(data);
 
     dispatch({
       type: HOME_SUCCESS,

@@ -3,6 +3,9 @@
 .loader:after {
   border-radius: 50%;
 }
+.loader_container{
+  grid-column: 2;
+}
 .loader {
   color: #cb1010;
   font-size: 6px;
