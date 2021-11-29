@@ -1,42 +1,34 @@
 import * as types from "../actionTypes";
 import initialState from "./initialState";
 
- const authReducer = (state = initialState.auth, action) => {
+const channelReducer = (state = initialState.channelDetails, action) => {
   const { type, payload } = action;
+
   switch (type) {
-    case types.LOGIN_REQUEST:
+    case types.CHANNEL_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
-    case types.LOGIN_SUCCESS:
+    case types.CHANNEL_SUCCESS:
       return {
         ...state,
         loading: false,
-        accessToken: payload,
+        channel: payload,
+      };
+    case types.SET_SUBSCRIPTION_STATUS:
+      return {
+        ...state,
+        loading: false,
+        CheckSubscription: payload,
       };
 
-    case types.LOGIN_FAILED:
+    case types.CHANNEL_FAILED:
       return {
         ...state,
         loading: false,
-        accessToken: null,
         error: payload,
-      };
-
-    case types.LOAD_PROFILE:
-      return {
-        ...state,
-        profile: payload,
-        loading: false,
-      };
-
-    case types.LOG_OUT:
-      return {
-        ...state,
-        accessToken: null,
-        profile: null,
       };
 
     default:
@@ -44,4 +36,4 @@ import initialState from "./initialState";
   }
 };
 
-export default authReducer;
+export default channelReducer;

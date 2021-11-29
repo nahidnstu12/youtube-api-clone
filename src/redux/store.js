@@ -1,16 +1,20 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import thunk from "redux-thunk";
+import { createStore, applyMiddleware, compose } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { authReducer } from "./reducer/authReducer";
-import { videosReducer } from "./reducer/videosReducer";
+import thunk from "redux-thunk";
+import { createWrapper } from "next-redux-wrapper";
+import initialState from "./reducer/initialState";
+import rootReducer from "./reducer";
 
-const rootReducer = combineReducers({
-  auth: authReducer,
-  homeVideos:videosReducer,
-});
+const makeStore = () => {
+  console.log(initialState);
+  const composeEnhancers =
+    process.env.NODE_ENV !== "production" ? composeWithDevTools : compose;
 
-const compose = composeWithDevTools(applyMiddleware(thunk));
+  return createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(thunk))
+  );
+};
 
-const store = createStore(rootReducer, {}, compose);
-
-export default store;
+export default createWrapper(makeStore, { debug: true });

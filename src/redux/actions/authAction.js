@@ -8,6 +8,7 @@ import {
   LOGIN_SUCCESS,
   LOG_OUT,
 } from "../actionTypes";
+import Cookies from "js-cookie";
 
 export const login = () => async (dispatch) => {
   try {
@@ -37,9 +38,20 @@ export const login = () => async (dispatch) => {
       payload: profile,
     });
 
-    // session storage
-    sessionStorage.setItem(YTC_ACESS_TOKEN, accessToken);
-    sessionStorage.setItem(YTC_PROFILE, JSON.stringify(profile));
+    
+    Cookies.set(YTC_ACESS_TOKEN, JSON.stringify(accessToken), {
+      path: "/",
+      expires: 14,
+      sameSite: true,
+      //  secure: true,
+    });
+    Cookies.set(YTC_PROFILE, JSON.stringify(profile), {
+      path: "/",
+      expires: 14,
+      sameSite: true,
+      //  secure: true,
+    });
+    
   } catch (error) {
     dispatch({
       type: LOGIN_FAILED,
@@ -49,13 +61,14 @@ export const login = () => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-
   await auth.signOut();
 
   dispatch({
     type: LOG_OUT,
   });
 
-  sessionStorage.removeItem(YTC_ACESS_TOKEN);
-  sessionStorage.removeItem(YTC_PROFILE);
+  // sessionStorage.removeItem(YTC_ACESS_TOKEN);
+  // sessionStorage.removeItem(YTC_PROFILE);
+  Cookies.remove(YTC_ACESS_TOKEN);
+  Cookies.remove(YTC_PROFILE);
 };

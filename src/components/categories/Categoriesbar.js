@@ -5,7 +5,7 @@ import {
   getPopularVideos,
 } from "../../redux/actions/videosAction";
 import { keywords } from "../../utils/contsants";
-import "./_categoriesbar.scss";
+import styles from "./_categoriesbar.module.scss";
 
 const Categoriesbar = () => {
   const [activeElement, setActiveElement] = useState("All");
@@ -13,7 +13,7 @@ const Categoriesbar = () => {
 
   const handleActiveElement = (val) => {
     setActiveElement(val);
- 
+
     if (val === "All") {
       dispatch(getPopularVideos());
     } else {
@@ -21,18 +21,17 @@ const Categoriesbar = () => {
     }
   };
 
-  
+  const activeElementType = (word) =>
+    activeElement === word
+      ? styles.category__element + " " + styles.active
+      : styles.category__element;
 
   return (
-    <div className="category">
+    <div className={styles.category}>
       {keywords.map((word, i) => (
         <div
           key={i}
-          className={
-            activeElement === word
-              ? "category__element active"
-              : "category__element"
-          }
+          className={activeElementType(word)}
           onClick={() => handleActiveElement(word)}
         >
           {word}

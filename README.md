@@ -9,5 +9,22 @@ Exploring Api & Building Real World App.
 - Youtube data api 3 integrate
 - homeVideos populate with popular videos
 - categorical videos
--
+- watch screen with relatedVideos, videoMetaData, comments
+- adding comment specific video
+- check subscription status
+- 
+```
+
+### Expected Feature 
+
+```
+- refactoring codebase
+- search functionality
+- get channeldetails 
+- like/dislike
+- liked videos
+- subscribed channel list
+- playlists
+- skeleton
+- 
 ```
