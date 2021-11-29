@@ -17,5 +17,7 @@ export default {
     loading: false,
     activeCategory: "All",
   },
-  channelDetails:{}
+  channelDetails:{},
+  commentList:[],
+  relatedVideo:[]
 };

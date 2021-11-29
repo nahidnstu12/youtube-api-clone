@@ -43,7 +43,7 @@ const HomeScreen = () => {
         loader={<Loader />}
         className={styles.video_grid}
       >
-        {videos.map((video, index) => (
+        {videos?.map((video, index) => (
           <Link
             key={index}
             href={`/watch/${

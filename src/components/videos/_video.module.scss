@@ -58,7 +58,8 @@
 // videoHorizontal styles
 
 .videoHorizontal {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: 0.3rem;
   margin-bottom: 0.25rem;
   cursor: pointer;
@@ -202,11 +203,11 @@
 }
 
 // comments
-.comments{
-    p{
-        margin-top: 0.5rem;
-        margin-left: 4px;
-    }
+.comments {
+  p {
+    margin-top: 0.5rem;
+    margin-left: 4px;
+  }
 }
 .comments__form {
   margin: 1rem 0;

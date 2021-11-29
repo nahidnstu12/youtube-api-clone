@@ -11,6 +11,8 @@ const Header = ({ handleToggle }) => {
   // const name = profile?.name;
   // const photoUrl = profile?.photoUrl;
   // console.log(photoUrl);
+    const { photoUrl } = useSelector((state) => state?.auth?.profile);
+
   return (
     <div className={styles.header}>
       <FaBars
@@ -28,7 +30,7 @@ const Header = ({ handleToggle }) => {
       <div className={styles.header__icons}>
         <MdNotifications size={28} />
         <MdApps size={28} />
-        {/* <img src={profile?.photoUrl} alt={"name"} className={styles.avatar} title={profile?.name} /> */}
+        <img src={photoUrl} alt={"name"} className={styles.avatar} title={"profile?.name"} />
       </div>
     </div>
   );

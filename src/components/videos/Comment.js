@@ -1,18 +1,20 @@
+import moment from "moment";
 import styles from "./_video.module.scss"
-export default function Comment() {
+export default function Comment({comment}) {
+   const {
+      authorDisplayName,
+      authorProfileImageUrl,
+      publishedAt,
+      textDisplay,
+   } = comment
     return (
       <div className={styles.comment}>
-        <img
-          src="https://yt3.ggpht.com/FUpDMlzjZhQnn0qLqQJrMhEcgjR2lMwATxFzF4I61REL-nZS8uYADWDpa6Eie-bU-cjQUph2ObY=s48-c-k-c0x00ffffff-no-rj"
-          alt=""
-          className={styles._}
-        />
+        <img src={authorProfileImageUrl} alt="" />
         <div className={styles.comment__body}>
-          <p className={styles.comment__header}>test comment • 2 days ago</p>
-          <p className={styles._}>
-            Wow!!! Looking forward to build it. Your videos are entertaining by
-            the way :)
+          <p className={styles.comment__header}>
+            {authorDisplayName} • {moment(publishedAt).fromNow()}
           </p>
+          <p className={styles._}>{textDisplay}</p>
         </div>
       </div>
     );
