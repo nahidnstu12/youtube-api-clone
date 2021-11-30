@@ -1,27 +1,25 @@
 import request from "../../utils/axios";
-import {
-  CHANNEL_FAILED,
-  CHANNEL_REQUEST,
-  CHANNEL_SUCCESS,
-  SET_SUBSCRIPTION_STATUS,
-} from "../actionTypes";
+import * as Actions from "../actionTypes";
 
-export const getChannelByVideos = (channelId) => async (dispatch) => {
+export const getChannelByVideos = (channelId) => async (dispatch,getState) => {
   try {
     dispatch({
-      type: CHANNEL_REQUEST,
+      type: Actions.CHANNEL_DETAILS_REQUEST,
     });
 
     const { data } = await request("/channels", {
       params: {
-        part: "snippet,statistics",
+        part: "snippet,statistics,contentDetails",
         id: channelId,
       },
+      headers: {
+        Authorization: `Bearer ${getState().auth.accessToken}`,
+      },
     });
-    // console.log(data);
+    console.log(data);
 
     dispatch({
-      type: CHANNEL_SUCCESS,
+      type: Actions.CHANNEL_DETAILS_SUCCESS,
       payload: {
         ...data.items[0],
       },
@@ -29,7 +27,7 @@ export const getChannelByVideos = (channelId) => async (dispatch) => {
   } catch (error) {
     console.log("error " + error);
     dispatch({
-      type: CHANNEL_FAILED,
+      type: Actions.CHANNEL_DETAILS_FAIL,
       message: error.message,
     });
   }
@@ -48,7 +46,7 @@ export const checkSubscriptionStatus = (channelId) => async (dispatch, getState)
       },
     });
     dispatch({
-      type: SET_SUBSCRIPTION_STATUS,
+      type: Actions.SET_SUBSCRIPTION_STATUS,
       payload: data.items.length !== 0,
     });
     // console.log(data);

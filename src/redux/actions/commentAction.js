@@ -1,16 +1,10 @@
 import request from "../../utils/axios";
-import {
-  COMMENT_FAILED,
-  COMMENT_REQUEST,
-  COMMENT_SUCCESS,
-  CREATE_COMMENT_FAIL,
-  CREATE_COMMENT_SUCCESS,
-} from "../actionTypes";
+import * as Actions from "../actionTypes";
 
 export const getCommentsByVideoId = (videoId) => async (dispatch) => {
   try {
     dispatch({
-      type: COMMENT_REQUEST,
+      type: Actions.COMMENT_REQUEST,
     });
 
     const { data } = await request("/commentThreads", {
@@ -22,13 +16,13 @@ export const getCommentsByVideoId = (videoId) => async (dispatch) => {
     // console.log(data.items);
 
     dispatch({
-      type: COMMENT_SUCCESS,
+      type: Actions.COMMENT_SUCCESS,
       payload: [...data.items],
     });
   } catch (error) {
     console.log("error " + error);
     dispatch({
-      type: COMMENT_FAILED,
+      type: Actions.COMMENT_FAILED,
       message: error.message,
     });
   }
@@ -56,14 +50,14 @@ export const addComment = (id, text) => async (dispatch, getState) => {
       },
     });
     dispatch({
-      type: CREATE_COMMENT_SUCCESS,
+      type: Actions.CREATE_COMMENT_SUCCESS,
     });
 
     setTimeout(() => dispatch(getCommentsByVideoId(id)), 3000);
   } catch (error) {
     console.log(error);
     dispatch({
-      type: CREATE_COMMENT_FAIL,
+      type: Actions.CREATE_COMMENT_FAIL,
       // payload: error.response.data.message,
     });
   }

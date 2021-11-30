@@ -5,8 +5,9 @@ export default {
   auth: {
     accessToken: Cookies.get(YTC_ACESS_TOKEN) || null,
     profile:
-      (typeof Cookies.get(YTC_PROFILE) !== "undefined" &&
-        JSON.parse(Cookies.get(YTC_PROFILE))),
+      typeof Cookies.get(YTC_PROFILE) !== "undefined" &&
+      typeof Cookies.get(YTC_PROFILE) !== "null" &&
+      JSON.parse(Cookies.get(YTC_PROFILE) || ""),
     // accessToken: null,
     // profile: null,
     loading: false,
@@ -17,7 +18,8 @@ export default {
     loading: false,
     activeCategory: "All",
   },
-  channelDetails:{},
-  commentList:[],
-  relatedVideo:[]
+  channelDetails: {},
+  commentList: [],
+  relatedVideo: [],
+  searchResults: [],
 };
