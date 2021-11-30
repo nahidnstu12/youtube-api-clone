@@ -10,11 +10,11 @@ export default function WatchScreen({ videoId, videoData }) {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(getRelatedVideos(videoId));
+    // dispatch(getRelatedVideos(videoId));
   }, [videoId, dispatch]);
 
-  const {videos} = useSelector((state) => state.relatedVideo);
-  console.log(videos);
+  // const {videos} = useSelector((state) => state.relatedVideo);
+  // console.log(videos);
 
 
   return (
@@ -32,16 +32,16 @@ export default function WatchScreen({ videoId, videoData }) {
         <div className={styles.watch_bottom}>
           <VideoMetadata videoData={videoData} videoId={videoId} />
 
-          <Comments
+          {/* <Comments
             videoId={videoId}
             totalComments={videoData?.statistics?.commentCount}
-          />
+          /> */}
         </div>
       </div>
       <div className={styles.relatedVideos}>
-        {videos?.filter(video => video.snippet).map((video, j) => (
-          <VideoHorizontal key={j} video={video}/>
-        ))}
+        {/* {videos?.filter(video => video.snippet).map((video, j) => (
+          <VideoHorizontal key={j} video={video} relatedVideo/>
+        ))} */}
       </div>
     </div>
   );

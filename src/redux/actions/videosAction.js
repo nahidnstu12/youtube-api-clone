@@ -1,10 +1,11 @@
 import request from "../../utils/axios";
-import { HOME_FAILED, HOME_REQUEST, HOME_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS } from "../actionTypes";
+
+import * as Actions from "../actionTypes";
 
 export const getPopularVideos = () => async (dispatch, getStatic) => {
   try {
     dispatch({
-      type: HOME_REQUEST,
+      type: Actions.HOME_REQUEST,
     });
 
     const { data } = await request("/videos", {
@@ -16,10 +17,10 @@ export const getPopularVideos = () => async (dispatch, getStatic) => {
         pageToken: getStatic().homeVideos.pageToken,
       },
     });
-    // console.log(data);
-
+    
+    console.log(data);
     dispatch({
-      type: HOME_SUCCESS,
+      type: Actions.HOME_SUCCESS,
       payload: {
         videos: data.items,
         pageToken: data.nextPageToken,
@@ -29,7 +30,7 @@ export const getPopularVideos = () => async (dispatch, getStatic) => {
   } catch (error) {
     console.log("error " + error);
     dispatch({
-      type: HOME_FAILED,
+      type: Actions.HOME_FAILED,
       message: error.message,
     });
   }
@@ -38,13 +39,13 @@ export const getPopularVideos = () => async (dispatch, getStatic) => {
 export const getCategoricVideos = (keyword) => async (dispatch, getStatic) => {
   try {
     dispatch({
-      type: HOME_REQUEST,
+      type: Actions.HOME_REQUEST,
     });
 
     const { data } = await request("/search", {
       params: {
         part: "snippet",
-        maxResults: 12,
+        maxResults: 4,
         pageToken: getStatic().homeVideos.pageToken,
         q: keyword,
         type: "video",
@@ -53,7 +54,7 @@ export const getCategoricVideos = (keyword) => async (dispatch, getStatic) => {
     // console.log(data);
 
     dispatch({
-      type: HOME_SUCCESS,
+      type: Actions.HOME_SUCCESS,
       payload: {
         videos: [...data.items],
         pageToken: data.nextPageToken,
@@ -63,7 +64,7 @@ export const getCategoricVideos = (keyword) => async (dispatch, getStatic) => {
   } catch (error) {
     console.log("error " + error);
     dispatch({
-      type: HOME_FAILED,
+      type: Actions.HOME_FAILED,
       message: error.message,
     });
   }
@@ -72,26 +73,119 @@ export const getCategoricVideos = (keyword) => async (dispatch, getStatic) => {
 export const getRelatedVideos = (id) => async (dispatch) => {
   try {
     dispatch({
-      type: RELATED_VIDEO_REQUEST,
+      type: Actions.RELATED_VIDEO_REQUEST,
     });
 
     const { data } = await request("/search", {
       params: {
         part: "snippet",
         relatedToVideoId: id,
-        maxResults: 15,
+        maxResults: 4,
         type: "video",
       },
     });
     dispatch({
-      type: RELATED_VIDEO_SUCCESS,
+      type: Actions.RELATED_VIDEO_SUCCESS,
       payload: data.items,
     });
   } catch (error) {
     console.log(error.response.data.message);
     dispatch({
-      type: RELATED_VIDEO_FAIL,
+      type: Actions.RELATED_VIDEO_FAIL,
       payload: error.response.data.message,
+    });
+  }
+};
+
+export const getVideosBySearch = (keyword) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Actions.SEARCHED_VIDEO_REQUEST,
+    });
+    const { data } = await request("/search", {
+      params: {
+        part: "snippet",
+        maxResults: 4,
+        q: keyword,
+        type: "video,channel",
+      },
+    });
+
+    dispatch({
+      type: Actions.SEARCHED_VIDEO_SUCCESS,
+      payload: data.items,
+    });
+  } catch (error) {
+    console.log(error.message);
+    dispatch({
+      type: Actions.SEARCHED_VIDEO_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+export const getSubscribedChannels = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: Actions.SUBSCRIPTIONS_CHANNEL_REQUEST,
+    });
+    const { data } = await request("/subscriptions", {
+      params: {
+        part: "snippet,contentDetails",
+
+        mine: true,
+      },
+      headers: {
+        Authorization: `Bearer ${getState().auth.accessToken}`,
+      },
+    });
+    dispatch({
+      type: Actions.SUBSCRIPTIONS_CHANNEL_SUCCESS,
+      payload: data.items,
+    });
+  } catch (error) {
+    console.log(error.response);
+    dispatch({
+      type: Actions.SUBSCRIPTIONS_CHANNEL_FAIL,
+      payload: error.response,
+    });
+  }
+};
+
+export const getVideosByChannel = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Actions.CHANNEL_VIDEOS_REQUEST,
+    });
+
+    // 1. get upload playlist id
+    const {
+      data: { items },
+    } = await request("/channels", {
+      params: {
+        part: "contentDetails",
+        id: id,
+      },
+    });
+    const uploadPlaylistId = items[0].contentDetails.relatedPlaylists.uploads;
+    // 2. get the videos using the id
+    const { data } = await request("/playlistItems", {
+      params: {
+        part: "snippet,contentDetails",
+        playlistId: uploadPlaylistId,
+        maxResults: 5,
+      },
+    });
+
+    dispatch({
+      type: Actions.CHANNEL_VIDEOS_SUCCESS,
+      payload: data.items,
+    });
+  } catch (error) {
+    console.log(error.response);
+    dispatch({
+      type: Actions.CHANNEL_VIDEOS_FAIL,
+      payload: error.response,
     });
   }
 };
