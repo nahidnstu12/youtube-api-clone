@@ -30,7 +30,7 @@ const Video = ({ video, channelScreen }) => {
   const _videoId = id?.videoId || contentDetails?.videoId || id;
   const _channelId = videoOwnerChannelId ? videoOwnerChannelId : channelId;
 
-  console.log({ _videoId,_channelId });
+  // console.log({ _videoId,_channelId });
   useEffect(() => {
     const getContents = async () => {
       const {

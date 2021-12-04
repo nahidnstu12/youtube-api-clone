@@ -52,6 +52,7 @@ export default function ChannelPage() {
               <span>
                 {numeral(statistics?.subscriberCount).format("0.a")} subscribers
               </span>
+              <p>{statistics.videoCount} videos</p>
             </div>
           </div>
         )}

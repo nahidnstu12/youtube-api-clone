@@ -1,50 +1,51 @@
 ### imortant end url
 
 ```
+key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
 -videolists
-https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=BD&maxResults=3&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=BD&maxResults=3
 
 -singleVideo 
 https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=um1eZRfgq4E
 https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=H9u64nZrxCA
 
 -channel
-https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,contentDetails&id=UCtqvtAVmad5zywaziN6CbfA&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,contentDetails&id=UCtqvtAVmad5zywaziN6CbfA
 
 -comments 
 
-https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=um1eZRfgq4E&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=um1eZRfgq4E
 
 Authorization: Bearer [YOUR_ACCESS_TOKEN]
 Accept: application/json
 
 
 -relatedVideos
-https://youtube.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=um1eZRfgq4E&type=video&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=um1eZRfgq4E&type=video
 
 Authorization: Bearer [YOUR_ACCESS_TOKEN]
 Accept: application/json
 
 -subscription
-https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&mine=true&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&mine=true
 
 
 Authorization: Bearer [YOUR_ACCESS_TOKEN]
 Accept: application/json
 
 <!-- ck subscription -->UCFM3gG5IHfogarxlKcIHCAg sumit
-https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&forChannelId=UCFM3gG5IHfogarxlKcIHCAg&mine=true&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&forChannelId=UCFM3gG5IHfogarxlKcIHCAg&mine=true
 
-https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&forChannelId=UCFM3gG5IHfogarxlKcIHCAg&channelId=UCFM3gG5IHfogarxlKcIHCAg&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&forChannelId=UCFM3gG5IHfogarxlKcIHCAg&channelId=UCFM3gG5IHfogarxlKcIHCAg
 
-https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&mine=true&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&mine=true
 
 
 <!-- search by keyword -->
-https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=nextjs&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=love ajkal
 
 <!-- activities --> retuns chanel activity
-https://youtube.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&channelId=UCtqvtAVmad5zywaziN6CbfA&maxResults=25&key=AIzaSyAJ4uybqEPan5fWxGOX0eAwDsfY2mc6z20
+https://youtube.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&channelId=UCtqvtAVmad5zywaziN6CbfA&maxResults=25
 
 
 <!-- refreshtoken -->

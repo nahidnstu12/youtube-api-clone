@@ -7,16 +7,14 @@ import styles from "./header.module.scss";
 import { useRouter } from "next/dist/client/router";
 
 const Header = ({ handleToggle }) => {
-  // const { profile } = useSelector((state) => state.auth);
-  // const name = profile?.name;
-  // const photoUrl = profile?.photoUrl;
-  // console.log(photoUrl);
+
   const { profile } = useSelector((state) => state?.auth ||{});
   const [input, setInput] = useState("");
   const router = useRouter();
   const handleSubmit = (e) => {
     e.preventDefault();
-    router.push(`search/${input}`);
+    router.push(`/search/${input}`);
+    // setInput("")
   };
 
   return (
