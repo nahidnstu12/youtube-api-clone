@@ -22,10 +22,14 @@ export const login = () => async (dispatch) => {
     console.log(res);
 
     const accessToken = res.credential.accessToken;
-
+    // const refreshToken = res.user.refreshToken;
+    const ch = await auth.currentUser.getIdToken(true)
+    console.log(ch)
+    
     const profile = {
       name: res.additionalUserInfo.profile.name,
       photoUrl: res.additionalUserInfo.profile.picture,
+      refreshToken: res.user.refreshToken,
     };
 
     dispatch({
@@ -38,7 +42,6 @@ export const login = () => async (dispatch) => {
       payload: profile,
     });
 
-    
     Cookies.set(YTC_ACESS_TOKEN, JSON.stringify(accessToken), {
       path: "/",
       expires: 14,
@@ -51,7 +54,6 @@ export const login = () => async (dispatch) => {
       sameSite: true,
       //  secure: true,
     });
-    
   } catch (error) {
     dispatch({
       type: LOGIN_FAILED,

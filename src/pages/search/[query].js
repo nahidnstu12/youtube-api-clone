@@ -9,7 +9,7 @@ export default function SearchPage() {
   const router = useRouter();
   const query = router.query.query;
   const dispatch = useDispatch();
-
+  console.log({ router, query });
   useEffect(() => {
     dispatch(getVideosBySearch(query));
   }, [query, dispatch]);

@@ -1,6 +1,6 @@
 import moment from "moment";
 import numeral from "numeral";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdThumbDown, MdThumbUp } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -9,9 +9,11 @@ import {
   checkSubscriptionStatus,
   getChannelByVideos,
 } from "../../redux/actions/channelAction";
+import { addRating, getLikedVideo } from "../../redux/actions/likedVideoActions";
 import styles from "./_video.module.scss";
 
 export default function VideoMetadata({ videoData, videoId }) {
+  // const [ratingText,setRating] = useState("none")
   const { snippet, statistics } = videoData;
   const { channelId, channelTitle, description, title, publishedAt } = snippet;
   const { viewCount, likeCount, dislikeCount } = statistics;
@@ -22,10 +24,23 @@ export default function VideoMetadata({ videoData, videoId }) {
     dispatch(checkSubscriptionStatus(channelId));
   }, [dispatch, channelId]);
 
-  const { channel, CheckSubscription } = useSelector((state) => state.channelDetails);
-  // console.log(videoData);
-  // const { snippet: chSnippet, statistics: chStatistics } = channel;
-  // console.log(channel?.snippet);
+  useEffect(() => {
+    dispatch(getLikedVideo(videoId));
+  }, [dispatch, videoId]);
+
+  //  useEffect(() => {
+  //    dispatch(addRating(videoId,ratingText));
+  //  }, [dispatch, videoId,ratingText]);
+
+  const handleRate = async (text) => {
+    if (text !== "none") dispatch(addRating(videoId, text));
+  };
+  const { channel, CheckSubscription } = useSelector(
+    (state) => state.channelDetails
+  );
+  const {rating} = useSelector(state => state.likedVideo)
+  // console.log({rating, videoId});
+  
   return (
     <div className={styles.videoMetaData}>
       <div className={styles.videoMetaData__top}>
@@ -39,11 +54,19 @@ export default function VideoMetadata({ videoData, videoId }) {
 
           <div>
             <span className={styles.icon}>
-              <MdThumbUp size={26} />
+              <MdThumbUp
+                size={26}
+                className={`${rating === "like" && styles.liked}`}
+                onClick={() => handleRate("like")}
+              />
               {numeral(likeCount).format("0.a")}
             </span>
             <span className={styles.mr_3}>
-              <MdThumbDown size={26} />
+              <MdThumbDown
+                size={26}
+                className={`${rating === "dislike" && styles.liked}`}
+                onClick={() => handleRate("dislike")}
+              />
               {numeral(dislikeCount).format("0.a")}
             </span>
           </div>
@@ -58,7 +81,10 @@ export default function VideoMetadata({ videoData, videoId }) {
           />
           <div className={styles.videoMetaData__channel_name}>
             <span>{channelTitle}</span>
-            <span>{numeral(channel?.statistics?.subscriberCount).format("0.a")} Subscribers</span>
+            <span>
+              {numeral(channel?.statistics?.subscriberCount).format("0.a")}{" "}
+              Subscribers
+            </span>
           </div>
         </div>
 

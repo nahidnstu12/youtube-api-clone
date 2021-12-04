@@ -19,15 +19,18 @@ const Video = ({ video, channelScreen }) => {
       thumbnails: { medium },
       channelTitle,
       channelId,
+      videoOwnerChannelId,
     },
     contentDetails,
   } = video;
 
-  //   console.log("time:"+moment("PT15M33S").fromNow())
+  // console.log({ video });
   const seconds = moment.duration(duration).asSeconds();
   const _duration = moment.utc(seconds * 1000).format("mm:ss");
-   const _videoId = id?.videoId || contentDetails?.videoId || id;
+  const _videoId = id?.videoId || contentDetails?.videoId || id;
+  const _channelId = videoOwnerChannelId ? videoOwnerChannelId : channelId;
 
+  // console.log({ _videoId,_channelId });
   useEffect(() => {
     const getContents = async () => {
       const {
@@ -38,8 +41,8 @@ const Video = ({ video, channelScreen }) => {
           id: _videoId,
         },
       });
-      setDuration(items[0].contentDetails.duration);
-      setViews(items[0].statistics.viewCount);
+      setDuration(items[0]?.contentDetails.duration);
+      setViews(items[0]?.statistics.viewCount);
       //   console.log(items)
     };
     getContents();
@@ -53,19 +56,19 @@ const Video = ({ video, channelScreen }) => {
       } = await request("/channels", {
         params: {
           part: "snippet",
-          id: channelId,
+          id: _channelId,
         },
       });
-      setChanelIcon(items[0].snippet.thumbnails.default.url);
+      setChanelIcon(items[0]?.snippet.thumbnails.default.url);
     };
     getChannelIcon();
-  }, [channelId]);
+  }, [_channelId]);
   //   console.log(chanelIcon);
 
   return (
     <div className={styles.video}>
       <div className={styles.video__top}>
-        <img src={medium.url} alt="thumbnail" />
+        <img src={medium?.url} alt="thumbnail" />
         <span>{_duration}</span>
       </div>
       <div className={styles.video__title}>{title}</div>
