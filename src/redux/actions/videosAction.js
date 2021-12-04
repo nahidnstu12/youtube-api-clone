@@ -16,6 +16,9 @@ export const getPopularVideos = () => async (dispatch, getStatic) => {
         maxResults: 12,
         pageToken: getStatic().homeVideos.pageToken,
       },
+      headers:{
+        
+      }
     });
     
     console.log(data);

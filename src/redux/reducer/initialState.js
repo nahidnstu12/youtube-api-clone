@@ -22,4 +22,6 @@ export default {
   commentList: [],
   relatedVideo: [],
   searchResults: [],
+  likedVideo:[],
+  playlists:[]
 };

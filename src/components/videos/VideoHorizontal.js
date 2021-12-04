@@ -31,6 +31,7 @@ export default function VideoHorizontal({
   const router = useRouter();
 
   const isVideo = !(id.kind === "youtube#channel" || subScreen);
+  const _videoId = id?.videoId || id;
 
   useEffect(() => {
     const get_video_details = async () => {
@@ -39,14 +40,14 @@ export default function VideoHorizontal({
       } = await request("/videos", {
         params: {
           part: "contentDetails,statistics",
-          id: id.videoId,
+          id: _videoId,
         },
       });
       setDuration(items[0].contentDetails.duration);
       setViews(items[0].statistics.viewCount);
     };
     if (isVideo) get_video_details();
-  }, [id, isVideo]);
+  }, [_videoId, isVideo]);
 
   useEffect(() => {
     const get_channel_icon = async () => {
@@ -67,7 +68,7 @@ export default function VideoHorizontal({
   const _duration = moment.utc(seconds * 1000).format("mm:ss");
 
   const _channelId = resourceId?.channelId || channelId;
-  const thumbnail = !isVideo && styles.videoHorizontal__thumbnail_channel
+  const thumbnail = !isVideo && styles.videoHorizontal__thumbnail_channel;
 
   const handleClick = () => {
     isVideo

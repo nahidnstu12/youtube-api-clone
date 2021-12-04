@@ -5,6 +5,8 @@ import channelDetails from "./channelReducer"
 import commentList from "./commentReducer"
 import relatedVideo from "./relatedVideoReducer"
 import searchResults from "./searchVideoReducer";
+import likedVideo from "./likedVideoReducer";
+import playlists from "./playlistReducer";
 
 export default combineReducers({
   auth,
@@ -13,4 +15,6 @@ export default combineReducers({
   commentList,
   relatedVideo,
   searchResults,
+  likedVideo,
+  playlists
 });

@@ -37,6 +37,9 @@
     &.open{
         transform: translateX(0);
     }
+    .lastElement{
+        margin-top: 10rem;
+    }
 }
 
 @media (max-width:$breakpoint-medium){

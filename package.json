@@ -29,5 +29,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.4"
   }
 }

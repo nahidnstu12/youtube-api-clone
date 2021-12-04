@@ -26,7 +26,7 @@
     padding: 0.4rem;
     border: none;
     width: 150px;
-    border-radius: 5px
+    border-radius: 5px;
   }
 }
 
@@ -38,5 +38,19 @@
   a {
     color: #b1bdb4;
     text-decoration: none;
+  }
+}
+
+// playlist
+.playlist {
+  &__thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+  &__section{
+    margin: 1rem;
+    p{
+      font-size: 1rem;
+    }
   }
 }

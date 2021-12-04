@@ -4,15 +4,13 @@ import {
   MdSubscriptions,
   MdExitToApp,
   MdThumbUp,
-  MdHistory,
   MdHome,
-  MdSentimentDissatisfied,
-  MdLibraryBooks,
+  MdPlaylistPlay,
 } from "react-icons/md";
 import styles from "./sidebar.module.scss";
 import { logout } from "../../redux/actions/authAction";
 import Link from "next/link";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 
 const Sidebar = ({ sidebar, handleToggle }) => {
   const dispatch = useDispatch();
@@ -30,42 +28,41 @@ const Sidebar = ({ sidebar, handleToggle }) => {
       className={`${sidebar} ? ${styles.sidebar} ${styles.open} : ${styles.sidebar}`}
       onClick={() => handleToggle()}
     >
-      <Link href="/">
-        <li>
-          <MdHome size={23} />
-          <span>Home</span>
+      <div className="topBar">
+        <Link href="/">
+          <li>
+            <MdHome size={23} />
+            <span>Home</span>
+          </li>
+        </Link>
+        <Link href="/feed/subscriptions">
+          <li>
+            <MdSubscriptions size={23} />
+            <span>Subscription</span>
+          </li>
+        </Link>
+        <Link href="/likedVideos">
+          <li>
+            <MdThumbUp size={23} />
+            <span>Liked Video</span>
+          </li>
+        </Link>
+        <Link href="/myplaylists">
+          <li>
+            <MdPlaylistPlay size={23} />
+            <span>My Playlists</span>
+          </li>
+        </Link>
+      </div>
+      
+      <div>
+        <hr className={styles.lastElement} />
+        <li onClick={handleLogout}>
+          <MdExitToApp size={23} />
+          <span>Log Out</span>
         </li>
-      </Link>
-      <Link href="/feed/subscriptions">
-        <li>
-          <MdSubscriptions size={23} />
-          <span>Subscription</span>
-        </li>
-      </Link>
-      <Link href="/watch/1">
-        <li>
-          <MdThumbUp size={23} />
-          <span>Liked Video</span>
-        </li>
-      </Link>
-      <li>
-        <MdHistory size={23} />
-        <span>History</span>
-      </li>
-      <li>
-        <MdLibraryBooks size={23} />
-        <span>Library</span>
-      </li>
-      <li>
-        <MdSentimentDissatisfied size={23} />
-        <span>Who's Know</span>
-      </li>
-      <hr />
-      <li onClick={handleLogout}>
-        <MdExitToApp size={23} />
-        <span>Log Out</span>
-      </li>
-      <hr />
+        <hr />
+      </div>
     </nav>
   );
 };
