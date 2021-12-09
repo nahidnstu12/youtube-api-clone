@@ -21,7 +21,7 @@ export const getPopularVideos = () => async (dispatch, getStatic) => {
       }
     });
     
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: Actions.HOME_SUCCESS,
       payload: {

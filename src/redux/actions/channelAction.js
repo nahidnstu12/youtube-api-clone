@@ -16,7 +16,7 @@ export const getChannelByVideos = (channelId) => async (dispatch,getState) => {
         Authorization: `Bearer ${getState().auth.accessToken}`,
       },
     });
-    console.log(data);
+    // console.log(data);
 
     dispatch({
       type: Actions.CHANNEL_DETAILS_SUCCESS,

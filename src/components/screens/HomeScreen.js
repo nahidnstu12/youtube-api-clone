@@ -23,7 +23,7 @@ const HomeScreen = () => {
     }
     // console.log("pageToken")
   }, [dispatch]);
-  console.log(videos.length);
+  // console.log(videos.length);
 
   const fetchData = () => {
     if (activeCategory === "All") {
