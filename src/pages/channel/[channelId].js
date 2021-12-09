@@ -12,9 +12,9 @@ import { getVideosMyPlaylist } from "../../redux/actions/playlistAction";
 export default function ChannelPage() {
   const router = useRouter();
   const channelId = router.query.channelId;
-  console.log(channelId);
+  // console.log(channelId);
   // console.log(router);
-  const ckActions = channelId.includes("PLR");
+  const ckActions = channelId.includes("PLR") || false;
 
   const dispatch = useDispatch();
 
