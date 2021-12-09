@@ -1,11 +1,5 @@
-import {
-  getCategoricVideos,
-  getPopularVideos,
-} from "../redux/actions/videosAction";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import HomeScreen from "../components/screens/HomeScreen";
-import Loader from "../components/screens/Loader";
+// import Loader from "../components/screens/Loader";
 
 export default function Index() {
   

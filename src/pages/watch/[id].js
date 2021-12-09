@@ -10,7 +10,7 @@ export default function video({ data }) {
   // const {videos} = useSelector(state=>state.homeVideos)
   // const selectedVideo = videos?.filter(video => video.id === id)
   // console.log(selectedVideo);
-  console.log(data)
+  // console.log(data)
   // console.log(query)
   return (
     <div>

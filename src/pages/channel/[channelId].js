@@ -14,7 +14,7 @@ export default function ChannelPage() {
   const channelId = router.query.channelId;
   // console.log(channelId);
   // console.log(router);
-  const ckActions = channelId.includes("PLR") || false;
+  const ckActions = channelId?.includes("PLR") || false;
 
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ export default function ChannelPage() {
 
   // const _videoId = videos?.snippet?.resourceId?.videoId;
   const videoData = ckActions ? playlistVideos : videos;
-  console.log(videoData);
+  // console.log(videoData);
   return (
     <div>
       <div className={styles.channelHeader}>
@@ -52,7 +52,7 @@ export default function ChannelPage() {
               <span>
                 {numeral(statistics?.subscriberCount).format("0.a")} subscribers
               </span>
-              <p>{statistics.videoCount} videos</p>
+              <p>{statistics?.videoCount} videos</p>
             </div>
           </div>
         )}

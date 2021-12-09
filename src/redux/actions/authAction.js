@@ -24,7 +24,7 @@ export const login = () => async (dispatch) => {
     const accessToken = res.credential.accessToken;
     // const refreshToken = res.user.refreshToken;
     const ch = await auth.currentUser.getIdToken(true)
-    console.log(ch)
+    // console.log(ch)
     
     const profile = {
       name: res.additionalUserInfo.profile.name,
@@ -44,13 +44,13 @@ export const login = () => async (dispatch) => {
 
     Cookies.set(YTC_ACESS_TOKEN, JSON.stringify(accessToken), {
       path: "/",
-      expires: 14,
+      expires: 1,
       sameSite: true,
       //  secure: true,
     });
     Cookies.set(YTC_PROFILE, JSON.stringify(profile), {
       path: "/",
-      expires: 14,
+      expires: 1,
       sameSite: true,
       //  secure: true,
     });
