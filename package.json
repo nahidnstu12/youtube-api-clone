@@ -30,6 +30,7 @@
     "start": "next start"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.0.0-rc.1",
     "postcss": "^8.4.4"
   }
 }
