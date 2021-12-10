@@ -2,7 +2,6 @@
   "name": "youtube-api-clone",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nahidnstu12.github.io/youtube-api-clone/",
   "dependencies": {
     "axios": "^0.21.1",
     "firebase": "^8.6.3",
