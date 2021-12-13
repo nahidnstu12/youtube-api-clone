@@ -1,7 +1,11 @@
 import numeral from "numeral";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment, getCommentsByVideoId } from "../../redux/actions/commentAction";
+import {
+  addComment,
+  getCommentsByVideoId,
+} from "../../redux/actions/commentAction";
+import Loader from "../screens/Loader";
 import Comment from "./Comment";
 import styles from "./_video.module.scss";
 
@@ -13,14 +17,13 @@ export default function Comments({ videoId, totalComments }) {
     dispatch(getCommentsByVideoId(videoId));
   }, [videoId, dispatch]);
 
-  const { comments } = useSelector((state) => state.commentList);
+  const { comments, loading } = useSelector((state) => state.commentList);
   const { photoUrl } = useSelector((state) => state.auth?.profile);
 
-  // console.log(photoUrl);
+  // console.log(loading);
   const _comments = comments?.map(
     (comment) => comment.snippet.topLevelComment.snippet
   );
-  
 
   // console.log(_comments)
 
@@ -48,9 +51,11 @@ export default function Comments({ videoId, totalComments }) {
         </form>
       </div>
       <div className={styles.comments__list}>
-        {_comments?.map((comment, i) => (
-          <Comment comment={comment} key={i} />
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          _comments?.map((comment, i) => <Comment comment={comment} key={i} />)
+        )}
       </div>
     </div>
   );

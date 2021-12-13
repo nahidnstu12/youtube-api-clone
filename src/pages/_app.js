@@ -6,6 +6,8 @@ import { YTC_ACESS_TOKEN } from "../utils/contsants";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useRouter } from "next/dist/client/router";
+import {  ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -45,6 +47,22 @@ function MyApp({ Component, pageProps }) {
       ) : (
         <Layout>
           <Component {...pageProps} />
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            // rtl={false}
+            // pauseOnFocusLoss
+            draggable
+            // pauseOnHover
+            toastStyle={{
+              backgroundColor: "#333",
+              color: "#eee",
+            }}
+            progressClassName="toastProgress"
+          />
         </Layout>
       )}
     </>

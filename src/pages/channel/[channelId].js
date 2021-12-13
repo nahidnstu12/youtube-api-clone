@@ -8,6 +8,7 @@ import Video from "../../components/videos/Video";
 import Link from "next/link";
 import numeral from "numeral";
 import { getVideosMyPlaylist } from "../../redux/actions/playlistAction";
+import SkeletonVideo from "../../components/screens/Skeleton";
 
 export default function ChannelPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function ChannelPage() {
     (state) => state.channelDetails
   );
 
-  const { playlistVideos } = useSelector((state) => state.playlists);
+  const { playlistVideos,loading } = useSelector((state) => state.playlists);
 
   const { snippet, statistics } = channel || {};
 
@@ -59,6 +60,13 @@ export default function ChannelPage() {
 
         {/* <button>Subscribe</button> */}
       </div>
+       {loading ? (
+        <div className={styles.video_grid}>
+          {[...Array(12)].map((_, i) => (
+            <SkeletonVideo key={i} />
+          ))}
+        </div>
+      ) : (
       <div className={styles.video_grid}>
         {videoData?.map((video, index) => (
           <Link
@@ -71,7 +79,7 @@ export default function ChannelPage() {
             </a>
           </Link>
         ))}
-      </div>
+      </div>)}
     </div>
   );
 }

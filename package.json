@@ -19,10 +19,12 @@
     "react-loading-skeleton": "^2.2.0",
     "react-redux": "^7.2.4",
     "react-show-more-text": "^1.5.2",
+    "react-toastify": "^8.1.0",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "sass": "1.32.12"
+    "sass": "1.32.12",
+    "swr": "^1.1.1"
   },
   "scripts": {
     "dev": "next dev",

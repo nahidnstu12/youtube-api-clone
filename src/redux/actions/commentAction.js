@@ -11,6 +11,7 @@ export const getCommentsByVideoId = (videoId) => async (dispatch) => {
       params: {
         part: "snippet",
         videoId: videoId,
+        maxResults:8,
       },
     });
     // console.log(data.items);
