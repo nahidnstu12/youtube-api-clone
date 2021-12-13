@@ -30,14 +30,18 @@ export default function ChannelPage() {
     if (ckActions) dispatch(getVideosMyPlaylist(channelId));
   }, [dispatch, channelId]);
 
-  const { videos, loading, channel } = useSelector(
-    (state) => state.channelDetails
+  const {
+    videos,
+    loading: chLoading,
+    channel,
+  } = useSelector((state) => state.channelDetails);
+
+  const { playlistVideos, loading: plLoading } = useSelector(
+    (state) => state.playlists
   );
 
-  const { playlistVideos,loading } = useSelector((state) => state.playlists);
-
   const { snippet, statistics } = channel || {};
-
+  const loading = chLoading || plLoading;
   // const _videoId = videos?.snippet?.resourceId?.videoId;
   const videoData = ckActions ? playlistVideos : videos;
   // console.log(videoData);
@@ -60,26 +64,27 @@ export default function ChannelPage() {
 
         {/* <button>Subscribe</button> */}
       </div>
-       {loading ? (
+      {loading ? (
         <div className={styles.video_grid}>
           {[...Array(12)].map((_, i) => (
             <SkeletonVideo key={i} />
           ))}
         </div>
       ) : (
-      <div className={styles.video_grid}>
-        {videoData?.map((video, index) => (
-          <Link
-            key={index}
-            href={`/watch/${video.snippet?.resourceId?.videoId}`}
-            passHref
-          >
-            <a>
-              <Video video={video} channelScreen />
-            </a>
-          </Link>
-        ))}
-      </div>)}
+        <div className={styles.video_grid}>
+          {videoData?.map((video, index) => (
+            <Link
+              key={index}
+              href={`/watch/${video.snippet?.resourceId?.videoId}`}
+              passHref
+            >
+              <a>
+                <Video video={video} channelScreen />
+              </a>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
