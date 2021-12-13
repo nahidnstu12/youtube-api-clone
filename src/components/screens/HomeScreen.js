@@ -10,12 +10,15 @@ import Video from "../videos/Video";
 import Loader from "./Loader";
 import styles from "./_homescreen.module.scss";
 import Link from "next/link";
+import SkeletonVideo from "./Skeleton";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const { videos, activeCategory } = useSelector((state) => state.homeVideos);
+  const { videos, activeCategory, loading } = useSelector(
+    (state) => state.homeVideos
+  );
   const { accessToken } = useSelector((state) => state.auth);
-  // console.log(accessToken);
+
 
   useEffect(() => {
     if (accessToken) {
@@ -36,27 +39,35 @@ const HomeScreen = () => {
     <div className={styles.home_screen}>
       <Categoriesbar />
 
-      <InfiniteScroll
-        dataLength={videos.length}
-        hasMore={false}
-        next={fetchData}
-        loader={<Loader />}
-        className={styles.video_grid}
-      >
-        {videos?.map((video, index) => (
-          <Link
-            key={index}
-            href={`/watch/${
-              typeof video.id === "object" ? video.id.videoId : video.id
-            }`}
-            passHref
-          >
-            <a>
-              <Video video={video} />
-            </a>
-          </Link>
-        ))}
-      </InfiniteScroll>
+      {loading ? (
+        <div className={styles.video_grid}>
+          {[...Array(12)].map((_, i) => (
+            <SkeletonVideo key={i} />
+          ))}
+        </div>
+      ) : (
+        <InfiniteScroll
+          dataLength={videos.length}
+          hasMore={false}
+          next={fetchData}
+          loader={<Loader />}
+          className={styles.video_grid}
+        >
+          {videos?.map((video, index) => (
+            <Link
+              key={index}
+              href={`/watch/${
+                typeof video.id === "object" ? video.id.videoId : video.id
+              }`}
+              passHref
+            >
+              <a>
+                <Video video={video} />
+              </a>
+            </Link>
+          ))}
+        </InfiniteScroll>
+      )}
     </div>
   );
 };

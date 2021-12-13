@@ -5,17 +5,18 @@ import { getRelatedVideos } from "../../redux/actions/videosAction";
 import Comments from "../videos/Comments";
 import VideoHorizontal from "../videos/VideoHorizontal";
 import VideoMetadata from "../videos/VideoMetadata";
+import Loader from "./Loader";
+import SkeletonVideo from "./Skeleton";
 import styles from "./_watch.module.scss";
 export default function WatchScreen({ videoId, videoData }) {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-    // dispatch(getRelatedVideos(videoId));
+    dispatch(getRelatedVideos(videoId));
   }, [videoId, dispatch]);
 
-  // const {videos} = useSelector((state) => state.relatedVideo);
-  // console.log(videos);
-
+  const { videos, loading } = useSelector((state) => state.relatedVideo);
+  // console.log(videoData);
 
   return (
     <div className={styles.watch_screen}>
@@ -30,18 +31,26 @@ export default function WatchScreen({ videoId, videoData }) {
           className={styles.iframe_player}
         ></iframe>
         <div className={styles.watch_bottom}>
-          <VideoMetadata videoData={videoData} videoId={videoId} />
+          {!videoData ? (
+            <Loader />
+          ) : (
+            <VideoMetadata videoData={videoData} videoId={videoId} />
+          )}
 
-          {/* <Comments
+          <Comments
             videoId={videoId}
             totalComments={videoData?.statistics?.commentCount}
-          /> */}
+          />
         </div>
       </div>
       <div className={styles.relatedVideos}>
-        {/* {videos?.filter(video => video.snippet).map((video, j) => (
-          <VideoHorizontal key={j} video={video} relatedVideo/>
-        ))} */}
+        {loading
+          ? [...Array(6)].map((_, i) => <SkeletonVideo key={i} />)
+          : videos
+              ?.filter((video) => video.snippet)
+              .map((video, j) => (
+                <VideoHorizontal key={j} video={video} relatedVideo />
+              ))}
       </div>
     </div>
   );

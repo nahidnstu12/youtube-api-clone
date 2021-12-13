@@ -18,7 +18,11 @@ export const getLikedVideo =
       });
       // console.log(data);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response.data.error);
+      dispatch({
+        type: Actions.GET_LIKED_VIDEO_FAIL,
+        payload: error.response?.data?.error,
+      });
     }
   };
 

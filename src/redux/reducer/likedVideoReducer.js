@@ -25,7 +25,7 @@ const likedVideoReducer = (state = initialState.likedVideo, action) => {
     case Actions.GET_LIKED_VIDEO_FAIL:
       return {
         ...state,
-        // loading: false,
+        loading: false,
         error: payload,
       };
 

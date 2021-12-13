@@ -65,7 +65,7 @@ export const getVideosMyPlaylist = (playlistId) => async (dispatch,getState) => 
     console.log(error.response);
     dispatch({
       type: Actions.PLAYLIST_VIDEOS_FAIL,
-      payload: error.response,
+      payload: error.response?.data?.error,
     });
   }
 };

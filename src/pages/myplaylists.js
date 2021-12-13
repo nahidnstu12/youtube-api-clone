@@ -4,6 +4,8 @@ import styles from "../styles/pages.module.scss";
 import { getMyPlaylist } from "../redux/actions/playlistAction";
 import Link from "next/link";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import SkeletonVideo from "../components/screens/Skeleton";
+import { toast } from "react-toastify";
 
 export default function myplaylists() {
   const dispatch = useDispatch();
@@ -12,9 +14,15 @@ export default function myplaylists() {
     dispatch(getMyPlaylist());
   }, [dispatch]);
 
-  const { playlist } = useSelector((state) => state.playlists);
+  const { playlist, loading, error } = useSelector((state) => state.playlists);
 
-  return (
+  return loading ? (
+    <div className={styles.video_grid}>
+      {[...Array(8)].map((_, i) => (
+        <SkeletonVideo key={i} />
+      ))}
+    </div>
+  ) : !error && !loading ? (
     <div className={styles.video_grid}>
       {playlist?.map((video) => (
         <Link href={`/channel/${video.id}`} key={video.id}>
@@ -24,14 +32,22 @@ export default function myplaylists() {
         </Link>
       ))}
     </div>
+  ) : (
+    <>
+      <p className={styles.error_msg}>
+        {error?.error?.message?.substring(0, 133)}
+      </p>
+      <p style={{ display: "none" }}>
+        {error && toast.error(`${error.error?.status} (${error.error?.code})`)}
+      </p>
+    </>
   );
 }
 
-const PlaylistItem = ({video}) => {
+const PlaylistItem = ({ video }) => {
   const {
     id,
     snippet: {
-      
       title,
       thumbnails: { medium },
     },

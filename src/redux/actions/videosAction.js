@@ -147,10 +147,10 @@ export const getSubscribedChannels = () => async (dispatch, getState) => {
       payload: data.items,
     });
   } catch (error) {
-    console.log(error.response);
+    console.log(error.response?.data?.error);
     dispatch({
       type: Actions.SUBSCRIPTIONS_CHANNEL_FAIL,
-      payload: error.response,
+      payload: error.response?.data?.error,
     });
   }
 };
